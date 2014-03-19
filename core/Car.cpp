@@ -9,10 +9,10 @@ Car::~Car() {
 
 Car::Car(char* _model, int _top_speed,
          int _acceleration, int _stability, Color* _color) : model(NULL),
-                                                            top_speed(_top_speed),
-                                                            acceleration(_acceleration),
-                                                            stability(_stability),
-                                                            color(_color)
+top_speed(_top_speed),
+acceleration(_acceleration),
+stability(_stability),
+color(_color)
 {
     setModel(_model);
 }
@@ -61,3 +61,38 @@ void Car::setColor(Color* value) {
     color = value;
 }
 
+void Director::setBuilder(Builder* newBuilder)
+{
+    builder = newBuilder;
+}
+
+Car* Director::getCar()
+{
+    Car* car = new Car(builder->getCurrentModel(), builder->getCurrentTopSpeed(), builder->getCurrentAcceleration(), builder->getCurrentStability(), builder->getCurrentColor());
+    
+    return car;
+}
+
+MitsubishiEvo9Builder::MitsubishiEvo9Builder() {
+    
+}
+
+char* MitsubishiEvo9Builder::getCurrentModel() {
+    return "Mitsubishi";
+}
+
+int MitsubishiEvo9Builder::getCurrentTopSpeed() {
+    return 300;
+}
+
+int MitsubishiEvo9Builder::getCurrentStability() {
+    return 5;
+}
+
+int MitsubishiEvo9Builder::getCurrentAcceleration() {
+    return 4;
+}
+
+Color* MitsubishiEvo9Builder::getCurrentColor() {
+    return new Color(125,125,125);
+}
