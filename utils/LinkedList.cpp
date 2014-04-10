@@ -3,6 +3,9 @@
 
 using namespace std;
 
+// Има грешка. На едно място дава segmentation fault (пипа се чужда памет),
+// трябва да бъде оправена. Ще има бонус за човека, който я оправи.
+
 template <typename T>
 LinkedList <T>:: LinkedList()
 {
