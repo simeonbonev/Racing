@@ -1,5 +1,5 @@
-#ifndef LLINKEDLIST_H_INCLUDED
-#define LLINKEDLIST_H_INCLUDED
+#ifndef LINKEDLIST_H_INCLUDED
+#define LINKEDLIST_H_INCLUDED
 
 template <typename T>
 struct Node
@@ -13,16 +13,18 @@ class LinkedList
 {
 private:
     Node<T> * start;
+    Node<T> * end;
+    void del();
 public:
     LinkedList();
     LinkedList(LinkedList const&);
-    bool add(T);
+    void add(T);
     bool remove (int);
     void print();
-    T getItem(int);
+    bool isEmpty();
+    bool getItem(int,T&);
     ~LinkedList();
-    void operator= (LinkedList const&);
+    LinkedList& operator= (LinkedList const&);
 };
 
-
-#endif // LLINKEDLIST_H_INCLUDED
+#endif // LINKEDLIST_H_INCLUDED

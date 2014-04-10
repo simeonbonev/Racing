@@ -1,28 +1,39 @@
-#include "LlinkedList.h"
+#include "LinkedList.h"
 #include <iostream>
 
 using namespace std;
 
 template <typename T>
-LinkedList :: LinkedList()
+LinkedList <T>:: LinkedList()
 {
     start = end = NULL;
 }
 
 template <typename T>
-LinkedList :: LinkedList (LinkedList const& a)
+LinkedList <T>:: LinkedList (LinkedList const& a)
 {
+    *this = a;
+}
+
+template<typename T>
+LinkedList<T>& LinkedList<T>::operator=(LinkedList<T> const& l)
+{
+    if(!isEmpty())
+    {
+        del();
+    }
     start = new Node<T>;
-    Node <T>* iterator = a.getStart();
+    Node <T>* iterator = l.getStart();
     while (iterator != NULL)
     {
         add(iterator->data);
         iterator = iterator-> next;
     }
+    return *this;
 }
 
 template <typename T>
-void LinkedList:: add (T _data)
+void LinkedList<T>:: add (T _data)
 {
     if (!isEmpty())
     {
@@ -42,13 +53,13 @@ void LinkedList:: add (T _data)
 }
 
 template <typename T>
-bool LinkedList :: isEmpty()
+bool LinkedList <T>:: isEmpty()
 {
     return start==NULL;
 }
 
 template <typename T>
-bool LinkedList :: remove (int index)
+bool LinkedList <T>:: remove (int index)
 {
     Node<T>* iter= start;
     if (isEmpty()) return false;
@@ -70,7 +81,7 @@ bool LinkedList :: remove (int index)
 }
 
 template <typename T>
-void LinkedList :: print()
+void LinkedList <T>:: print()
 {
     Node<T>* iter = start;
     while(iter != NULL)
@@ -82,7 +93,7 @@ void LinkedList :: print()
 }
 
 template <typename T>
-bool LinkedList :: getItem (int index , T& result)
+bool LinkedList <T>:: getItem (int index , T& result)
 {
     if(isEmpty())
         return false;
@@ -101,7 +112,20 @@ bool LinkedList :: getItem (int index , T& result)
 
 // da se dovurshi
 template <typename T>
-LinkedList :: ~LinkedList ()
+LinkedList <T>:: ~LinkedList ()
 {
-    Node <
+    del();
+}
+template<typename T>
+void LinkedList<T>::del()
+{
+    Node<T>* temp=start;
+    Node<T>* next=start->next;
+    while(temp!=NULL)
+    {
+        delete temp;
+        temp = next;
+        if(next != NULL)
+            next = next->next;
+    }
 }
